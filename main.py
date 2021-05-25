@@ -32,11 +32,13 @@ def get_market_price(keyword):
     data['market'] = name
     return data
 
+
 for i in markets:
     df = pd.concat([df, get_market_price(i)], ignore_index=True)
 
 data = df.sort_values(by=['good_name'])
-data.reset_index(drop=True)
+data.drop(columns=['gather_time'], inplace=True)
+data.columns = ['最高', '最低', '均价', '商品', '市场']
 
 if __name__ == '__main__':
     send_msg('今日菜价', data)

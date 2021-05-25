@@ -38,7 +38,7 @@ for i in markets:
 
 data = df.sort_values(by=['good_name'])
 data.drop(columns=['gather_time'], inplace=True)
-data.columns = ['最高', '最低', '均价', '商品', '市场']
+data.columns = ['最高价格', '最低价格', '平均价格', '商品', '市场']
 
 if __name__ == '__main__':
     send_msg('今日菜价', data)

@@ -14,13 +14,13 @@ headers = {
 df = pd.DataFrame()
 
 
-def get_response(html_url):
+def get_response(html_url: str) -> str:
     response = requests.get(url=html_url, headers=headers)
     response.encoding = response.apparent_encoding
     return response
 
 
-def get_market_price(keyword):
+def get_market_price(keyword: str) -> pd.DataFrame:
     r = get_response(f'{base_url}/scmarket/allNoQueryParams?name={keyword}')
     res = json.loads(r.text)
     name = res['markets'][0]['name']

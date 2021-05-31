@@ -12,4 +12,4 @@ pip install -r requirements.txt
 
 配置消息通知和市场关键字：`config.py`（支持 pushplus, qmsg, server 酱）
 
-定时执行：`main.py`
+定时执行：`python3 main.py`

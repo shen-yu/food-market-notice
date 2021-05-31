@@ -28,15 +28,16 @@ def get_market_price(keyword: str) -> pd.DataFrame:
 
     r2 = get_response(f'{base_url}/spgoods/getGoodsPrice?marketid={id}')
     res2 = json.loads(r2.text)['newPrice']
-    data = pd.DataFrame(res2).set_index('index')
-    data['market'] = name
-    return data
-
+    if res2:
+        data = pd.DataFrame(res2).set_index('index')
+        data['market'] = name
+        return data
 
 for i in markets:
-    df = pd.concat([df, get_market_price(i)], ignore_index=True)
+    df = df.append(get_market_price(i), ignore_index=True)
 
 data = df.sort_values(by=['good_name'])
+print(data)
 data.drop(columns=['gather_time'], inplace=True)
 data.columns = ['最高价格', '最低价格', '平均价格', '商品', '市场']
 
